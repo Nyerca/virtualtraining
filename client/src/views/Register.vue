@@ -50,6 +50,7 @@
 </template>
 
 <script lang="ts">
+import UserAccessApi from '../services/UserAccessApi';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
@@ -90,14 +91,13 @@ export default class Registration extends Vue {
 
         if (this.confirmPassword !== this.password) {
             this.errors.push({text: 'Password don\'t match'});
-        }
-
-        if (this.password.length < 4) {
+        } else if (this.password.length < 4) {
             this.errors.push({text: 'Password must be at least 4'});
+        } else {
+            // Chiamata al server per verificare se l'inserimento e' avvenuto con successo!
+            const response = UserAccessApi.postRegister();
+            this.errors.push({text: 'Registrato con successo!'});
         }
-
-        // Chiamata al server per verificare se l'inserimento e' avvenuto con successo!
-
         event.preventDefault();
     }
     public switchPasswordVisibility(event: Event) {
@@ -128,8 +128,5 @@ export default class Registration extends Vue {
     .logo {
         width: 120px;
         margin:auto;
-    }
-    input, button {
-        height:inherit;
     }
 </style>

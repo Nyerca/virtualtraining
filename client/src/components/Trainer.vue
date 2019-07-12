@@ -3,7 +3,7 @@
     <h1>Trainers</h1>
     <p>This file will list all the trainers.</p>
 
-    <div v-for="trainer in trainers">
+    <div v-for="trainer in trainers" :key="trainer._id">
       <p>
         <span><b>{{ trainer.name }}</b></span><br />
         <span>{{ trainer.surname }}</span>
