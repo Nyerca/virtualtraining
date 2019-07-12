@@ -1,0 +1,21 @@
+<template>
+    <div class="row">
+        <div class="col-md-3 mx-auto">
+            <div class="card card-body">
+                <img src="../assets/logo.png" class="logo">
+                <h3 class="text-center">Account Login</h3>
+                <form method="POST" action='/users/login'>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" required> 
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
