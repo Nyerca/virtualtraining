@@ -13,21 +13,21 @@
                     </div> 
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="name" class="form-control" required name="name" v-model="name"> 
+                        <input type="name" class="form-control" required name="name" v-model="newUser.name"> 
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" required name="email" v-model="email"> 
+                        <input type="email" class="form-control" required name="email" v-model="newUser.email"> 
                     </div>
                     <div class="form-group">
                         <label for="age">Age</label>
-                        <input type="number" class="form-control" required name="age" v-model="age" min="18"> 
+                        <input type="number" class="form-control" required name="age" v-model="newUser.age" min="18"> 
                     </div>
                     <div class="form-group">
 
                         <label for="password">Password</label>
                         <div class="input-group">
-                            <input :type="passwordFieldType" class="form-control" required name="password" v-model="password">
+                            <input :type="passwordFieldType" class="form-control" required name="password" v-model="newUser.password">
                             <button type="password" @click="switchPasswordVisibility">
                                 <span :class="showHideClassPassword"></span>
                             </button>
@@ -51,6 +51,7 @@
 
 <script lang="ts">
 import UserAccessApi from '../services/UserAccessApi';
+import { User } from '../services/UserAccessApi';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 
@@ -61,25 +62,25 @@ declare interface Error {
 @Component
 export default class Registration extends Vue {
     private errors: Error[];
-    private name: string;
-    private email: string;
-    private age: number;
-    private password: string;
+    private newUser: User;
+
     private confirmPassword: string;
 
+    // Used to show/hide password
     private passwordFieldType: string;
     private showHideClassPassword: string;
-
     private confirmPasswordFieldType: string;
     private showHideClassConfirmPassword: string;
 
     constructor() {
         super();
         this.errors = [];
-        this.name = '';
-        this.email = '';
-        this.age = 18;
-        this.password = '';
+        this.newUser = {
+            name: '',
+            email: '',
+            age: 18,
+            password: '',
+        };
         this.confirmPassword = '';
         this.passwordFieldType = 'password';
         this.showHideClassPassword = 'fas fa-eye';
@@ -89,13 +90,13 @@ export default class Registration extends Vue {
     public checkForm(event: Event) {
         this.errors = [];
 
-        if (this.confirmPassword !== this.password) {
+        if (this.confirmPassword !== this.newUser.password) {
             this.errors.push({text: 'Password don\'t match'});
-        } else if (this.password.length < 4) {
+        } else if (this.newUser.password.length < 4) {
             this.errors.push({text: 'Password must be at least 4'});
         } else {
             // Chiamata al server per verificare se l'inserimento e' avvenuto con successo!
-            const response = UserAccessApi.postRegister();
+            const response = UserAccessApi.postRegister(this.newUser);
             this.errors.push({text: 'Registrato con successo!'});
         }
         event.preventDefault();
