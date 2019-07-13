@@ -2,6 +2,6 @@ import Api from '@/services/Api';
 
 export default {
   postRegister() {
-    return Api().get('/api/register');
+    return Api().post('/api/register');
   },
 };
