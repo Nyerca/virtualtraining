@@ -19,6 +19,7 @@ exports.createUser = function (req, res) {
 		email: req.body.email
 	}).then(user => {
 		if (user) {
+			console.log('<> Error: User already exists!');
 			errors.push({
 				text: 'These email is already used!'
 			});
@@ -29,41 +30,33 @@ exports.createUser = function (req, res) {
 				age: req.body.age,
 				password: req.body.password
 			});
-			console.log(newUser);
 			//Primo parametro: dimensione sale, secondo `e la callBack richiamata quando il sale `e pronto
 			bcrypt.genSalt(10, (err, salt) => {
 				//Hash prende la password, il sale e la callback da richiamare uina volta generta l' hash
 				bcrypt.hash(newUser.password, salt, (err, hash) => {
 					if (err) throw err;
 					newUser.password = hash;
-					console.log(hash);
 					newUser.save()
 						.then(user => {
 							//Registrazione ok
 							res.status(201).json(user);
-							console.log('Usente registrato!');
+							console.log('() Success: New user saved!');
 						})
 						.catch(err => {
-							console.log('Errore nel salvataggio dell\'utente' + err);
-							res.send(err);
-							return;
+							//res.send(err);
+							console.log(err);
+							errors.push({
+								text: 'Error with newUser.save() [MongoDb error]!'
+							});
 						});
 				});
 			});
+		} else {
+			console.log('<> Error: User not found but there are some errors into user fields!');
 		}
-	});
-
-	//Check if errors exists
+		//Check if errors exists
 	if (errors.length > 0) {
-		// res.render('users/register', {
-		// 	errors: errors,
-		// 	name: req.body.name,
-		// 	email: req.body.email,
-		// 	age: req.body.age,
-		// 	password: req.body.password,
-		// 	password2: req.body.password2
-		// });
-		console.log('Trovati errori!');
+		console.log('<> Error: Founded error, cannot save new user into db!');
 		res.status(401).json({
 			errors: errors,
 			name: req.body.name,
@@ -71,4 +64,5 @@ exports.createUser = function (req, res) {
 			age: req.body.age
 		});
 	}
+	});
 };

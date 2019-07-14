@@ -97,7 +97,18 @@ export default class Registration extends Vue {
         } else {
             // Chiamata al server per verificare se l'inserimento e' avvenuto con successo!
             const response = UserAccessApi.postRegister(this.newUser);
-            this.errors.push({text: 'Registrato con successo!'});
+
+            response.then((r) => {
+                        this.errors.push({text: 'Risposta ottenuta 1!'});
+                        this.errors.push({text: r.data});
+                    })
+                    .catch((error) => {
+                        this.errors.push({text: 'Risposta ottenuta 2!'});
+                        this.errors.push(error.data.errors);
+                    });
+
+
+            this.errors.push({text: 'CheckForm terminata!'});
         }
         event.preventDefault();
     }
