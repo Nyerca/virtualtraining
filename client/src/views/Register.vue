@@ -23,25 +23,11 @@
                         <label for="age">Age</label>
                         <input type="number" class="form-control" required name="age" v-model="newUser.age" min="18"> 
                     </div>
-                    <div class="form-group">
+                    
+                    <PasswordField labelText="Password" passwordFieldName="password" passwordChangedEventName="passwordchanged" @passwordchanged="passwordChanged"/>
 
-                        <label for="password">Password</label>
-                        <div class="input-group">
-                            <input :type="passwordFieldType" class="form-control" required name="password" v-model="newUser.password">
-                            <button type="password" @click="switchPasswordVisibility">
-                                <span :class="showHideClassPassword"></span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password2">Confirm Password</label>
-                        <div class="input-group">
-                            <input :type="confirmPasswordFieldType" class="form-control" required name="password2" v-model="confirmPassword">
-                            <button type="password" @click="switchConfirmPasswordVisibility">
-                                <span :class="showHideClassConfirmPassword"></span>
-                            </button>
-                        </div>
-                    </div>
+                    <PasswordField labelText="Confirm Password" passwordFieldName="confirmationPassword" passwordChangedEventName="confirmationpasswordchanged" @confirmationpasswordchanged="confirmationPasswordChanged"/>
+
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -54,16 +40,21 @@ import UserAccessApi from '../services/UserAccessApi';
 import { User } from '../services/UserAccessApi';
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import PasswordField from '@/components/PasswordField.vue'; // @ is an alias to /src
 
 declare interface Error {
     text: string;
 }
 
-@Component
+@Component({
+    components: {
+        PasswordField,
+    },
+})
+
 export default class Registration extends Vue {
     private errors: Error[];
     private newUser: User;
-
     private confirmPassword: string;
 
     // Used to show/hide password
@@ -86,6 +77,14 @@ export default class Registration extends Vue {
         this.showHideClassPassword = 'fas fa-eye';
         this.confirmPasswordFieldType = 'password';
         this.showHideClassConfirmPassword = 'fas fa-eye';
+    }
+
+    public confirmationPasswordChanged(confirmationPasswordValue: string) {
+        this.confirmPassword = confirmationPasswordValue;
+    }
+
+    public passwordChanged(passwordValue: string) {
+        this.newUser.password = passwordValue;
     }
     public checkForm(event: Event) {
         this.errors = [];
