@@ -9,9 +9,7 @@ exports.createUser = function (req, res) {
 	console.log(req.body);
 
 	if (req.body.password.length < 4) {
-		errors.push({
-			text: 'Password must be at least 4'
-		});
+		errors.push('Password must be at least 4');
 	}
 
 	//Check if user already exists
@@ -19,10 +17,7 @@ exports.createUser = function (req, res) {
 		email: req.body.email
 	}).then(user => {
 		if (user) {
-			console.log('<> Error: User already exists!');
-			errors.push({
-				text: 'These email is already used!'
-			});
+			errors.push('These email is already used!');
 		} else if (errors.length == 0) {
 			const newUser = new User({
 				name: req.body.name,
@@ -40,29 +35,23 @@ exports.createUser = function (req, res) {
 						.then(user => {
 							//Registrazione ok
 							res.status(201).json(user);
-							console.log('() Success: New user saved!');
 						})
 						.catch(err => {
 							//res.send(err);
 							console.log(err);
-							errors.push({
-								text: 'Error with newUser.save() [MongoDb error]!'
-							});
+							errors.push('Error with newUser.save() [MongoDb error]!');
 						});
 				});
 			});
-		} else {
-			console.log('<> Error: User not found but there are some errors into user fields!');
 		}
 		//Check if errors exists
-	if (errors.length > 0) {
-		console.log('<> Error: Founded error, cannot save new user into db!');
-		res.status(401).json({
-			errors: errors,
-			name: req.body.name,
-			email: req.body.email,
-			age: req.body.age
-		});
-	}
+		if (errors.length > 0) {
+			res.status(401).json({
+				errors: errors,
+				name: req.body.name,
+				email: req.body.email,
+				age: req.body.age
+			});
+		}
 	});
 };

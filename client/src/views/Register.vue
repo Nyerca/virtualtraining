@@ -99,16 +99,13 @@ export default class Registration extends Vue {
             const response = UserAccessApi.postRegister(this.newUser);
 
             response.then((r) => {
-                        this.errors.push({text: 'Risposta ottenuta 1!'});
-                        this.errors.push({text: r.data});
+                        // TODO: Registrazione effettuata con successo? Decidere cosa fare
                     })
                     .catch((error) => {
-                        this.errors.push({text: 'Risposta ottenuta 2!'});
-                        this.errors.push(error.data.errors);
+                        error.response.data.errors.forEach((element: string) => {
+                            this.errors.push({text: element});
+                        });
                     });
-
-
-            this.errors.push({text: 'CheckForm terminata!'});
         }
         event.preventDefault();
     }
