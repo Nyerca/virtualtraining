@@ -5,6 +5,7 @@
                 <img src="../assets/logo.png" class="logo">
                 <h3 class="text-center">Account Register</h3>
                 <form @submit="checkForm" method="POST" action="">
+                    <p>{{registrationCompleted}}</p>
                     <div v-if="errors.length>0">
                         <b>Please correct the following error(s):</b>
                         <ul>
@@ -56,6 +57,7 @@ export default class Registration extends Vue {
     private errors: Error[];
     private newUser: User;
     private confirmPassword: string;
+    private registrationCompleted: string;
 
     constructor() {
         super();
@@ -67,6 +69,7 @@ export default class Registration extends Vue {
             password: '',
         };
         this.confirmPassword = '';
+        this.registrationCompleted = '';
     }
 
     public confirmationPasswordChanged(confirmationPasswordValue: string) {
@@ -89,6 +92,8 @@ export default class Registration extends Vue {
 
             response.then((r) => {
                         // TODO: Registrazione effettuata con successo? Decidere cosa fare
+                        this.registrationCompleted = 'Registration completed successfully!';
+                        setTimeout(() => this.registrationCompleted = '', 1500);
                     })
                     .catch((error) => {
                         error.response.data.errors.forEach((element: string) => {

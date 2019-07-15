@@ -55,9 +55,11 @@ export default class Login extends Vue {
 
         response.then((r) => {
                 // TODO: Login effettuato con successo? Decidere cosa fare
+                this.loginError = r.data.msg;
+                setTimeout(() => this.$router.push('/'), 1500);
             })
             .catch((error) => {
-                this.loginError = error + '';
+                this.loginError = error.response.data.msg;
             });
         event.preventDefault();
     }
