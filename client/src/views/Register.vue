@@ -4,7 +4,7 @@
             <div class="card card-body">
                 <img src="../assets/logo.png" class="logo">
                 <h3 class="text-center">Account Register</h3>
-                <form id="loginForm" @submit="checkForm" method="POST" action="">
+                <form @submit="checkForm" method="POST" action="">
                     <div v-if="errors.length>0">
                         <b>Please correct the following error(s):</b>
                         <ul>
@@ -57,12 +57,6 @@ export default class Registration extends Vue {
     private newUser: User;
     private confirmPassword: string;
 
-    // Used to show/hide password
-    private passwordFieldType: string;
-    private showHideClassPassword: string;
-    private confirmPasswordFieldType: string;
-    private showHideClassConfirmPassword: string;
-
     constructor() {
         super();
         this.errors = [];
@@ -73,10 +67,6 @@ export default class Registration extends Vue {
             password: '',
         };
         this.confirmPassword = '';
-        this.passwordFieldType = 'password';
-        this.showHideClassPassword = 'fas fa-eye';
-        this.confirmPasswordFieldType = 'password';
-        this.showHideClassConfirmPassword = 'fas fa-eye';
     }
 
     public confirmationPasswordChanged(confirmationPasswordValue: string) {
@@ -105,26 +95,6 @@ export default class Registration extends Vue {
                             this.errors.push({text: element});
                         });
                     });
-        }
-        event.preventDefault();
-    }
-    public switchPasswordVisibility(event: Event) {
-        if (this.passwordFieldType === 'password') {
-            this.passwordFieldType = 'text';
-            this.showHideClassPassword = 'fas fa-eye-slash';
-        } else {
-            this.passwordFieldType = 'password';
-            this.showHideClassPassword = 'fas fa-eye';
-        }
-        event.preventDefault();
-    }
-    public switchConfirmPasswordVisibility(event: Event) {
-        if (this.confirmPasswordFieldType === 'password') {
-            this.confirmPasswordFieldType = 'text';
-            this.showHideClassConfirmPassword = 'fas fa-eye-slash';
-        } else {
-            this.confirmPasswordFieldType = 'password';
-            this.showHideClassConfirmPassword = 'fas fa-eye';
         }
         event.preventDefault();
     }

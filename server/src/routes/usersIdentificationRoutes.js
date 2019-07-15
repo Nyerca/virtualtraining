@@ -5,7 +5,8 @@ module.exports = function(app) {
 	let userIdentificationController = require('../controllers/userIdentificationController');
 
     app.route('/api/register')
-		.post(userIdentificationController.createUser);
+    .post(userIdentificationController.createUser);
 
-    //TODO: login
+    app.route('/api/login')
+    .post(userIdentificationController.loginUser);
 };

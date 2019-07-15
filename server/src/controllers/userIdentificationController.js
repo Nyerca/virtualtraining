@@ -3,6 +3,15 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 let User = mongoose.model('User');
 
+exports.loginUser = function(req, res, next) {
+	let errors = [];
+	console.log(req.body);
+	passport.authenticate('local', {
+        successRedirect: 'http://localhost:8080/#/',
+        failureRedirect: 'http://localhost:8080/#/login',
+    })(req, res, next);
+};
+
 exports.createUser = function (req, res) {
 	let errors = [];
 

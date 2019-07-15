@@ -11,5 +11,8 @@ export default {
   postRegister(newUser: User) {
     return Api().post('/api/register', newUser);
   },
+  postLogin(email: string, password: string) {
+    return Api().post('/api/login', {email, password});
+  },
 };
 

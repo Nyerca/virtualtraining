@@ -1,18 +1,20 @@
 <template>
     <div class="row">
-        <div class="col-md-3 mx-auto">
+        <div class="col-md-4 mx-auto">
             <div class="card card-body">
                 <img src="../assets/logo.png" class="logo">
                 <h3 class="text-center">Account Login</h3>
-                <form method="POST" action='/users/login'>
+                <p>{{loginError}}</p>
+                <!-- TODO: quando la parte di ridizionamento lato server funziona inserire l'azione -->
+                <!-- <form method="POST" action='/users/login'> -->
+                <form method="POST" action='' @submit="checkForm">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" required> 
+                        <input type="email" class="form-control" name="email" required v-model="email"> 
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" name="password" required>
-                    </div>
+
+                    <PasswordField labelText="Password" passwordFieldName="password" passwordChangedEventName="passwordchanged" @passwordchanged="passwordChanged"/>
+
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -21,8 +23,44 @@
 </template>
 
 <script lang="ts">
-export default {
+import UserAccessApi from '../services/UserAccessApi';
+import { User } from '../services/UserAccessApi';
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import PasswordField from '@/components/PasswordField.vue'; // @ is an alias to /src
 
-};
+@Component({
+    components: {
+        PasswordField,
+    },
+})
+
+export default class Login extends Vue {
+    private email: string;
+    private password: string;
+    private loginError: string;
+
+    constructor() {
+        super();
+        this.email = '';
+        this.password = '';
+        this.loginError = '';
+    }
+
+    public passwordChanged(passwordValue: string) {
+        this.password = passwordValue;
+    }
+    private checkForm(event: Event) {
+        const response = UserAccessApi.postLogin(this.email, this.password);
+
+        response.then((r) => {
+                // TODO: Login effettuato con successo? Decidere cosa fare
+            })
+            .catch((error) => {
+                this.loginError = error + '';
+            });
+        event.preventDefault();
+    }
+}
 </script>
 
