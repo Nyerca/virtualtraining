@@ -3,26 +3,33 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 let User = mongoose.model('User');
 
+//TODO: da testare!!!!!
+exports.logoutUser = function(req, res, next) {
+	//This invalidates our cookie if one exists
+	req.logout();
+  
+	console.log("logged out")
+  
+	return res.send();
+};
+
 exports.loginUser = function(req, res, next) {
 	let errors = [];
 	console.log(req.body);
 	// As per configuration (config/passport.js) we have the parameters: error, user and error info
 	passport.authenticate('local', (err, user, info) => {
+		if (err) {
+			return res.status(500).json({msg: 'An internal error occurred trying to fetch the users information!'});
+		}
 		// if no user we assume something went wrong
 		if (!user) {
-		  return res.status(401).json({msg: 'Invalid mail or password'})
+		  return res.status(401).json({msg: 'Invalid mail or password'});
 		}
-	  	// call method injected by passport into express request object,
-		// passing the user returned by passport strategy
-		//Note: passport.authenticate() middleware invokes req.login() automatically. This function is primarily used when users sign up, during which req.login() can be invoked to automatically log in the newly registered user.
-	 	// req.logIn(user, {session: false}, (err) => {
-		//   if (err) {
-		// 	// Handle error
-		//   }
-		//   console.log("Login Exitoso")
-		//   return res.status(200).json({msg:'Login succesfully'})
-		// })
-		return res.status(200).json({msg:'Login succesfully'})
+		// req.login() assigns the user object to the request object req as req.user once the login operation completes. [For cookie]
+		req.logIn(user, function(err) {
+			if (err) { return next(err); }
+			return res.status(200).json({msg:'Login succesfully'});
+		});
 	  })(req, res, next);
 };
 
@@ -56,11 +63,9 @@ exports.createUser = function (req, res) {
 					newUser.password = hash;
 					newUser.save()
 						.then(user => {
-							//Registrazione ok
 							res.status(201).json(user);
 						})
 						.catch(err => {
-							//res.send(err);
 							console.log(err);
 							errors.push('Error with newUser.save() [MongoDb error]!');
 						});

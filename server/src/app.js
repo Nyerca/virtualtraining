@@ -2,7 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const passport = require('passport');
 /*Note Session data is not saved in the cookie itself, just the session ID. Session data is stored server-side.*/
-const session = require('express-session');
+
+//const session = require('express-session');
+const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
@@ -10,15 +12,25 @@ const morgan = require('morgan')
 const app = express()
 app.use(morgan('combined'))
 app.use(bodyParser.json())
-app.use(cors())
 
-//Middleware per l'express session
-app.use(session({
-    secret: 'muhahahaha', //Il segreto pu`o essere qualsiasi cosa
-    resave: true,
-    saveUninitialized: true,
-    //cookie: { secure: true }
-  }));
+//Cors config:
+//  origin -> url of the origin of the admitted requests
+//  credential: true -> Configures the Access-Control-Allow-Credentials CORS header. [Required to use cookies]
+app.use(cors({
+  origin:'http://localhost:8080',
+  credentials: true,
+}))
+
+//Middleware cookie session
+app.use(cookieSession({
+  name: 'mysession',
+  keys: ['randomkey'],
+  maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  cookie: {secure: true},
+}));
+
+
+
 //Importante inserirli dopo la sessione express o possono esserci problemi
 //Passport middleware
 app.use(passport.initialize());

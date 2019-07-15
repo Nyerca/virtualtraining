@@ -35,13 +35,19 @@ module.exports = function(passport){
 
     //Utilizzati per mantenere in sessione l' accesso dell'utente
     /*
-    In a typical web application, the credentials used to authenticate a user will only be transmitted during the login request. If authentication succeeds, a session will be established and maintained via a cookie set in the user's browser.
+        TODO: In questo caso mi salvo solo l'id dell'utente
     */
     passport.serializeUser(function(user, done) {
+        console.log('Mi salvo l\'utente con id:');
+        console.log(user.id);
         done(null, user.id);
     });
-      
+     /*
+        When a user makes a request for a secured URL. We tell passport how to retrieve the user object from our array of users. It will use the id we stored using the serializeUser method to achieve this.
+     */
     passport.deserializeUser(function(id, done) {
+        console.log('Ricerco id:');
+        console.log(id);
         User.findById(id, function(err, user) {
             done(err, user);
         });

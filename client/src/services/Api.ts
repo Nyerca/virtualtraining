@@ -1,4 +1,6 @@
 import axios from 'axios';
+//Required for cookies
+axios.defaults.withCredentials = true;
 
 export default function() {
   return axios.create({
