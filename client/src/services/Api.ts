@@ -1,5 +1,5 @@
 import axios from 'axios';
-// Required for cookies
+// Required for cookies -- TODO: forse non e' il massimo passare le credenziali ad ogni richiesta
 axios.defaults.withCredentials = true;
 
 export default function() {

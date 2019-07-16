@@ -20,6 +20,9 @@ export default class Logout extends Vue {
     }
     private logout() {
         this.debugVar = 'Richiesta di logout!';
+        this.$cookies.remove('userIsLogged');
+        setTimeout(() => this.$router.push('/'), 1500);
+
     }
 }
 </script>

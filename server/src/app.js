@@ -23,8 +23,8 @@ app.use(cors({
 
 //Middleware cookie session
 app.use(cookieSession({
-  name: 'mysession',
-  keys: ['randomkey'],
+  name: 'virtualtraining',
+  keys: ['secretAndSuperRandomKey'],
   maxAge: 24 * 60 * 60 * 1000, // 24 hours
   cookie: {secure: true},
 }));

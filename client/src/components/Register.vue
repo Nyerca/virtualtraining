@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-8 mx-auto">
             <div class="card card-body">
                 <img src="../assets/logo.png" class="logo">
                 <h3 class="text-center">Account Register</h3>
@@ -28,6 +28,11 @@
                     <PasswordField labelText="Password" passwordFieldName="password" passwordChangedEventName="passwordchanged" @passwordchanged="passwordChanged"/>
 
                     <PasswordField labelText="Confirm Password" passwordFieldName="confirmationPassword" passwordChangedEventName="confirmationpasswordchanged" @confirmationpasswordchanged="confirmationPasswordChanged"/>
+
+                    <div class="form-group">
+                        <input type="checkbox" id="agreement" class="rounded" checked>
+                        <label for="agreement">I understand this is not a real sign up.</label>
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

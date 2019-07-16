@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-8 mx-auto">
             <div class="card card-body">
                 <img src="../assets/logo.png" class="logo">
                 <h3 class="text-center">Account Login</h3>
@@ -55,6 +55,8 @@ export default class Login extends Vue {
         response.then((r) => {
                 // TODO: Login effettuato con successo? Decidere cosa fare
                 this.loginError = r.data.msg;
+                // TODO: Farsi passare dal server l'username dell'utente!
+                Vue.cookies.set('userIsLogged', 'Yeah');
                 setTimeout(() => this.$router.push('/'), 1500);
             })
             .catch((error) => {
