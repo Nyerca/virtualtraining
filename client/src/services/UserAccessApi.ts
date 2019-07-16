@@ -14,5 +14,8 @@ export default {
   postLogin(email: string, password: string) {
     return Api().post('/api/login', {email, password});
   },
+  getLogout() {
+    return Api().get('/api/logout');
+  },
 };
 

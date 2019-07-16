@@ -6,10 +6,24 @@
       <router-link to="/trainers">Trainers</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Register</router-link>
+      <Logout/>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script lang='ts'>
+    import { Component, Vue } from 'vue-property-decorator';
+    import Logout from '@/components/Logout.vue';
+
+    @Component({
+      components: {
+        Logout,
+      },
+    })
+    export default class App extends Vue {
+    }
+   </script>
 
 <style lang="scss">
 #app {

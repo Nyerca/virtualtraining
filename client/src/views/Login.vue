@@ -24,7 +24,6 @@
 
 <script lang="ts">
 import UserAccessApi from '../services/UserAccessApi';
-import { User } from '../services/UserAccessApi';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import PasswordField from '@/components/PasswordField.vue'; // @ is an alias to /src
