@@ -1,8 +1,6 @@
 <template>
     <div>
         <a href="#" @click.prevent="logout">Logout</a>
-        <br>
-        <p>{{debugVar}}</p>
     </div>
 </template>
 
@@ -13,15 +11,12 @@ import Component from 'vue-class-component';
 
 @Component
 export default class Logout extends Vue {
-    private debugVar: string;
     constructor() {
         super();
-        this.debugVar = '';
     }
     private logout() {
-        this.debugVar = 'Richiesta di logout!';
         this.$cookies.remove('userIsLogged');
-        setTimeout(() => this.$router.push('/'), 1500);
+        setTimeout(() => this.$router.push('/user-access'), 1500);
 
     }
 }

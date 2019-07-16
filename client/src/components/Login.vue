@@ -5,8 +5,6 @@
                 <img src="../assets/logo.png" class="logo">
                 <h3 class="text-center">Account Login</h3>
                 <p>{{loginError}}</p>
-                <!-- TODO: quando la parte di ridizionamento lato server funziona inserire l'azione -->
-                <!-- <form method="POST" action='/users/login'> -->
                 <form method="POST" action='' @submit="checkForm">
                     <div class="form-group">
                         <label for="email">Email</label>

@@ -30,7 +30,7 @@
                     <PasswordField labelText="Confirm Password" passwordFieldName="confirmationPassword" passwordChangedEventName="confirmationpasswordchanged" @confirmationpasswordchanged="confirmationPasswordChanged"/>
 
                     <div class="form-group">
-                        <input type="checkbox" id="agreement" class="rounded" checked>
+                        <input type="checkbox" id="agreement" class="rounded" v-model="checked">
                         <label for="agreement">I understand this is not a real sign up.</label>
                     </div>
 
@@ -63,6 +63,7 @@ export default class Registration extends Vue {
     private newUser: User;
     private confirmPassword: string;
     private registrationCompleted: string;
+    private checked: boolean;
 
     constructor() {
         super();
@@ -75,6 +76,7 @@ export default class Registration extends Vue {
         };
         this.confirmPassword = '';
         this.registrationCompleted = '';
+        this.checked = false;
     }
 
     public confirmationPasswordChanged(confirmationPasswordValue: string) {
@@ -91,6 +93,8 @@ export default class Registration extends Vue {
             this.errors.push({text: 'Password don\'t match'});
         } else if (this.newUser.password.length < 4) {
             this.errors.push({text: 'Password must be at least 4'});
+        } else if (!this.checked) {
+            this.errors.push({text: 'Please, agree to give your soul to the \'Amici della mappa interattiva Company\''});
         } else {
             // Chiamata al server per verificare se l'inserimento e' avvenuto con successo!
             const response = UserAccessApi.postRegister(this.newUser);

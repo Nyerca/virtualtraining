@@ -1,11 +1,27 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/trainers">Trainers</router-link> |
-      <router-link to="/user-access">Accedi a sto sistema</router-link>
-      <Logout/>
+    <div id="nav" class="navbar navbar-expand-sm navbar-dark mb-3">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/">Home</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/about">About</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/trainers">Trainers</router-link>
+                </li>
+                <li class="nav-item" v-if="this.$cookies.isKey('userIsLogged') == false">
+                    <router-link class="nav-link" to="/user-access">Accedi a sto sistema</router-link>
+                </li>
+                <li class="nav-item" v-else>
+                    <Logout class="nav-link"/>
+                </li>
+            </ul>
+        </div>
+      </div>
     </div>
     <router-view/>
   </div>
@@ -20,8 +36,7 @@
         Logout,
       },
     })
-    export default class App extends Vue {
-    }
+    export default class App extends Vue {}
    </script>
 
 <style lang="scss">
