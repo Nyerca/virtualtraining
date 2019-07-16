@@ -94,7 +94,8 @@ export default class Registration extends Vue {
         } else if (this.newUser.password.length < 4) {
             this.errors.push({text: 'Password must be at least 4'});
         } else if (!this.checked) {
-            this.errors.push({text: 'Please, agree to give your soul to the \'Amici della mappa interattiva Company\''});
+            this.errors.push({text: 'Please, agree to give your soul to the:\n' +
+            '\'Amici della mappa interattiva Company\''});
         } else {
             // Chiamata al server per verificare se l'inserimento e' avvenuto con successo!
             const response = UserAccessApi.postRegister(this.newUser);

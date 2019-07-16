@@ -7,10 +7,15 @@ let User = mongoose.model('User');
 exports.logoutUser = function(req, res, next) {
 	//This invalidates our cookie if one exists
 	req.logout();
-  
+
+	//Destroy session
+	req.session = null;
+
+	res.status(200).clearCookie('virtualtraining.sid', {path: '/'}).json({status: "Success"});
+
 	console.log("logged out")
   
-	return res.send();
+	//return res.send();
 };
 
 exports.loginUser = function(req, res, next) {
@@ -28,7 +33,7 @@ exports.loginUser = function(req, res, next) {
 		// req.login() assigns the user object to the request object req as req.user once the login operation completes. [For cookie]
 		req.logIn(user, function(err) {
 			if (err) { return next(err); }
-			return res.status(200).json({msg:'Login succesfully'});
+			return res.status(200).json({msg:'Login successfully'});
 		});
 	  })(req, res, next);
 };
