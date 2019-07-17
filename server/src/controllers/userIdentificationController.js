@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 let User = mongoose.model('User');
 
-//TODO: da testare!!!!!
 exports.logoutUser = function(req, res, next) {
 	//This invalidates our cookie if one exists
 	req.logout();

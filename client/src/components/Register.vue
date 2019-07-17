@@ -1,44 +1,40 @@
 <template>
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <div class="card card-body">
-                <img src="../assets/logo.png" class="logo">
-                <h3 class="text-center">Account Register</h3>
-                <form @submit="checkForm" method="POST" action="">
-                    <p>{{registrationCompleted}}</p>
-                    <div v-if="errors.length>0">
-                        <b>Please correct the following error(s):</b>
-                        <ul>
-                            <li v-for="error in errors" :key='error.text'>{{error.text}}</li>
-                        </ul>
-                    </div> 
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="name" class="form-control" required name="name" v-model="newUser.name"> 
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" required name="email" v-model="newUser.email"> 
-                    </div>
-                    <div class="form-group">
-                        <label for="age">Age</label>
-                        <input type="number" class="form-control" required name="age" v-model="newUser.age" min="18"> 
-                    </div>
-                    
-                    <PasswordField labelText="Password" passwordFieldName="password" passwordChangedEventName="passwordchanged" @passwordchanged="passwordChanged"/>
+        <div class="card card-body">
+            <img src="../assets/logo.png" class="logo">
+            <h3 class="text-center">Account Register</h3>
+            <form @submit="checkForm" method="POST" action="">
+                <p>{{registrationCompleted}}</p>
+                <div v-if="errors.length>0">
+                    <b>Please correct the following error(s):</b>
+                    <ul>
+                        <li v-for="error in errors" :key='error.text'>{{error.text}}</li>
+                    </ul>
+                </div> 
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="name" class="form-control" required name="name" v-model="newUser.name"> 
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" required name="email" v-model="newUser.email"> 
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" class="form-control" required name="age" v-model="newUser.age" min="18"> 
+                </div>
+                   
+                <PasswordField labelText="Password" passwordFieldName="password" passwordChangedEventName="passwordchanged" @passwordchanged="passwordChanged"/>
 
-                    <PasswordField labelText="Confirm Password" passwordFieldName="confirmationPassword" passwordChangedEventName="confirmationpasswordchanged" @confirmationpasswordchanged="confirmationPasswordChanged"/>
+                <PasswordField labelText="Confirm Password" passwordFieldName="confirmationPassword" passwordChangedEventName="confirmationpasswordchanged" @confirmationpasswordchanged="confirmationPasswordChanged"/>
 
-                    <div class="form-group">
-                        <input type="checkbox" id="agreement" class="rounded" v-model="checked">
-                        <label for="agreement">I understand this is not a real sign up.</label>
-                    </div>
+                <div class="form-group">
+                    <input type="checkbox" id="agreement" class="rounded" v-model="checked">
+                    <label for="agreement">I understand this is not a real sign up.</label>
+                </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
-    </div>
 </template>
 
 <script lang="ts">

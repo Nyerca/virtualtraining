@@ -1,22 +1,18 @@
 <template>
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <div class="card card-body">
-                <img src="../assets/logo.png" class="logo">
-                <h3 class="text-center">Account Login</h3>
-                <p>{{loginError}}</p>
-                <form method="POST" action='' @submit="checkForm">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" required v-model="email"> 
-                    </div>
-
-                    <PasswordField labelText="Password" passwordFieldName="password" passwordChangedEventName="passwordchanged" @passwordchanged="passwordChanged"/>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+    <div class="card card-body">
+        <img src="../assets/logo.png" class="logo">
+        <h3 class="text-center">Account Login</h3>
+        <p>{{loginError}}</p>
+        <form method="POST" action='' @submit="checkForm">
+            <div class="form-group">
+                <label for="email" class="control-label">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="Email" required v-model="email"> 
             </div>
-        </div>
+
+            <PasswordField labelText="Password" passwordFieldName="password" passwordChangedEventName="passwordchanged" @passwordchanged="passwordChanged"/>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
 </template>
 
@@ -64,4 +60,3 @@ export default class Login extends Vue {
     }
 }
 </script>
-

@@ -1,31 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav" class="navbar navbar-expand-sm navbar-dark mb-3">
-      <div class="container">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/">Home</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/about">About</router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link class="nav-link" to="/trainers">Trainers</router-link>
-                </li>
-                <li class="nav-item" v-if="this.$cookies.isKey('userIsLogged') == false">
-                    <router-link class="nav-link" to="/user-access">Accedi a sto sistema</router-link>
-                </li>
-                <li class="nav-item" v-else>
-                    <Logout class="nav-link"/>
-                </li>
-            </ul>
-        </div>
-      </div>
-    </div>
+    <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="#">NavBar</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-nav-item class="nav-link" to="/">Home</b-nav-item> 
+          <b-nav-item class="nav-link" to="/about">About</b-nav-item> 
+          <b-nav-item class="nav-link" to="/trainers">Trainers</b-nav-item> 
+          <b-nav-item class="nav-link" v-if="this.$cookies.isKey('userIsLogged') == false" to="/user-access">User access</b-nav-item> 
+          <Logout v-else/>
+        </b-navbar-nav>
+
+      </b-collapse>
+    </b-navbar>
     <router-view/>
   </div>
 </template>
+
 
 <script lang='ts'>
     import { Component, Vue } from 'vue-property-decorator';

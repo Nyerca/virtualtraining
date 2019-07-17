@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <b-nav-item class="nav-link">
         <a href="#" @click.prevent="logout">Logout</a>
         <b-alert v-model="showDismissibleAlert" :variant="alertType" dismissible>
             {{logOutError}}
         </b-alert>
-    </div>
+    </b-nav-item> 
 </template>
 
 <script lang="ts">

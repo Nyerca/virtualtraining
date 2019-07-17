@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-6 col-xl-3 mx-auto">
         <b-tabs content-class="mt-3">
           <b-tab title="Login" active>
                <Login/>
