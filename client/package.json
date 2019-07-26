@@ -10,8 +10,13 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.26",
+    "jquery": "^1.9.1",
+    "npm": "^6.10.1",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
+    "vue-cookies": "^1.5.13",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3"
   },

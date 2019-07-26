@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Trainers from './views/Trainers.vue';
+import SignUnSignIn from './views/SignUpSignIn.vue';
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/trainers',
       name: 'trainers',
       component: Trainers,
+    },
+    {
+      path: '/user-access',
+      name: 'user-access',
+      component: SignUnSignIn,
     },
   ],
 });

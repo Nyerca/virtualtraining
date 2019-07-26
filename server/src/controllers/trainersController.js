@@ -2,6 +2,15 @@ var mongoose = require('mongoose');
 var Trainer = mongoose.model('Trainer');
 
 exports.getTrainers = function(req, res) {
+	
+	console.log('Richiesta di accesso alla lista dei trainer da parte di:');
+	if(req.isAuthenticated()){
+		console.log(req.session.passport.user);
+	} else {
+		console.log('guest');
+	}
+	console.log('--------------------------------------------------------');
+
 	const trainers = [
 		new Trainer(
 			{
@@ -16,7 +25,7 @@ exports.getTrainers = function(req, res) {
 		  }
 		)
 	]
-	console.log(trainers);
+	//console.log(trainers);
 	// Mock
 	res.send(JSON.stringify(trainers));
 	/*

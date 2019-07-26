@@ -1,5 +1,5 @@
 module.exports = function(app) {
-	var trainersController = require('../controllers/trainersController');
+	let trainersController = require('../controllers/trainersController');
 
 	app.route('/api/trainers')
 		.get(trainersController.getTrainers)
