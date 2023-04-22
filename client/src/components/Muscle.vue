@@ -1,7 +1,8 @@
 <template>
     <div class="col-md-3">
 						<div class="card-body">
-							<button v-bind:id="'allenatore' + allenatore.id" @click.prevent="selectMe(allenatore.id)">{{ allenatore.name }}</button>
+							<input v-bind:id="'musc' + muscolo.id" type="checkbox" @change="testMe(muscolo.id)">
+							<label v-bind:for="'musc' + muscolo.id"><h5 class="card-title">{{ muscolo.name }}</h5></label>
 						</div>
 					</div>
 </template>

@@ -2,6 +2,7 @@ let mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 let User = mongoose.model('User');
+let data = require('./muscoli.json');
 
 exports.logoutUser = function(req, res, next) {
 	//This invalidates our cookie if one exists
@@ -13,7 +14,7 @@ exports.logoutUser = function(req, res, next) {
 	res.status(200).clearCookie('virtualtraining.sid', {path: '/'}).json({status: "Success"});
 
 	console.log("logged out")
-  
+
 	//return res.send();
 };
 

@@ -1,0 +1,32 @@
+[
+{
+  "id": 1,
+   "exercises": [
+		{
+			"name" : "flessioni",
+			"times" : 4,
+			"time"  : false
+		},
+		{
+			"name" : "corsa",
+			"times" : "03:00",
+			"time"  : true
+		}
+	]
+},
+{
+  "id": 2,
+   "exercises": [
+		{
+			"name" : "piegamenti",
+			"times" : 14,
+			"time"  : false
+		},
+		{
+			"name" : "camminata",
+			"times" : "03:10",
+			"time"  : true
+		}
+	]
+}
+]

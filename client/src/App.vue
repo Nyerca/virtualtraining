@@ -7,11 +7,17 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item class="nav-link" to="/">Home</b-nav-item> 
-          <b-nav-item class="nav-link" to="/about">About</b-nav-item> 
-          <b-nav-item class="nav-link" to="/trainers">Trainers</b-nav-item> 
-          <b-nav-item class="nav-link" v-if="this.$cookies.isKey('userIsLogged') == false" to="/user-access">User access</b-nav-item> 
+          <b-nav-item class="nav-link" to="/">Home</b-nav-item>
+          <b-nav-item class="nav-link" to="/about">About</b-nav-item>
+          <b-nav-item class="nav-link" to="/trainers">Trainers</b-nav-item>
+		  <b-nav-item class="nav-link" to="/userRequest">UserRequest</b-nav-item>
+		  <b-nav-item class="nav-link" to="/userPlan">UserPlan</b-nav-item>
+		  <b-nav-item class="nav-link" to="/userPlanExecution">UserPlanExecution</b-nav-item>
+		  <b-nav-item class="nav-link" to="/userProfile">UserProfile</b-nav-item>
+		  <b-nav-item class="nav-link" to="/user">User</b-nav-item>
+          <b-nav-item class="nav-link" v-if="this.$cookies.isKey('userIsLogged') == false" to="/user-access">User access</b-nav-item>
           <Logout v-else/>
+
         </b-navbar-nav>
 
       </b-collapse>

@@ -1,0 +1,34 @@
+[
+{
+  "id": 1,
+  "username": "user_1",
+  "muscles_id" : [1, 3],
+  "hour" : 2,
+  "minute" : 30,
+  "description" : "vorrei allenare gambe"
+},
+{
+  "id": 2,
+  "username": "user_2",
+  "muscles_id" : [2, 3],
+  "hour" : 1,
+  "minute" : 10,
+  "description" : "vorrei allenare braccia"
+},
+{
+  "id": 3,
+  "username": "user_3",
+   "muscles_id" : [5],
+   "hour" : 3,
+   "minute" : 20,
+   "description" : "vorrei allenare piedi"
+},
+{
+  "id": 4,
+  "username": "user_4",
+   "muscles_id" : [4, 3],
+   "hour" : 6,
+   "minute" : 40,
+   "description" : "vorrei allenare mani"
+}
+]

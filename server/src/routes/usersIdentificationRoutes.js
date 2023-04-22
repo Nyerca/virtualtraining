@@ -19,7 +19,7 @@ module.exports = function(app) {
     app.route('/api/login')
     .post(userIdentificationController.loginUser);
 
-    app.route('/api/logout') 
+    app.route('/api/logout')
     .get(authMiddleware, userIdentificationController.logoutUser);
-      
+
 };

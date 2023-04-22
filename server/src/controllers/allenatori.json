@@ -1,0 +1,22 @@
+[
+{
+  "id": 1,
+  "name": "allenatore_1",
+   "muscles_id" : [1, 3]
+},
+{
+  "id": 2,
+  "name": "allenatore_2",
+   "muscles_id" : [2, 3]
+},
+{
+  "id": 3,
+  "name": "allenatore_3",
+   "muscles_id" : [5]
+},
+{
+  "id": 4,
+  "name": "allenatore_4",
+   "muscles_id" : [4, 3]
+}
+]
